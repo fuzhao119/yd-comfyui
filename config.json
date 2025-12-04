@@ -1,0 +1,4 @@
+{
+  "server_url": "http://draw.aix.studio:6101",
+  "callback_path": "main.sh"
+}
