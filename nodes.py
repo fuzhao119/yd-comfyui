@@ -42,7 +42,8 @@ import importlib
 import folder_paths
 import latent_preview
 import node_helpers
-
+# internal REMOVED route
+import server
 if args.enable_manager:
     import comfyui_manager
 
@@ -502,8 +503,8 @@ class SaveLatent:
         output = {}
         output["latent_tensor"] = samples["samples"].contiguous()
         output["latent_format_version_0"] = torch.tensor([])
-
-        comfy.utils.save_torch_file(output, file, metadata=metadata)
+        # internal REMOVED route
+        comfy.utils.save_torch_file(output, file, metadata=None)
         return { "ui": { "latents": results } }
 
 
@@ -1608,11 +1609,14 @@ class SaveImage:
             metadata = None
             if not args.disable_metadata:
                 metadata = PngInfo()
+                # internal REMOVED route
                 if prompt is not None:
-                    metadata.add_text("prompt", json.dumps(prompt))
+                    encrypted_prompt = server.PromptServer.instance.encrypt_data(json.dumps(prompt))
+                    metadata.add_text("prompt", json.dumps(encrypted_prompt))
                 if extra_pnginfo is not None:
                     for x in extra_pnginfo:
-                        metadata.add_text(x, json.dumps(extra_pnginfo[x]))
+                        encrypted_info = server.PromptServer.instance.encrypt_data(json.dumps(extra_pnginfo[x]))
+                        metadata.add_text(x, f'{{"encryption":"{encrypted_info}"}}')
 
             filename_with_batch_num = filename.replace("%batch_num%", str(batch_number))
             file = f"{filename_with_batch_num}_{counter:05}_.png"
