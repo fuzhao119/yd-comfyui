@@ -41,6 +41,14 @@ from app.subgraph_manager import SubgraphManager
 from typing import Optional, Union
 from api_server.routes.internal.internal_routes import InternalRoutes
 from protocol import BinaryEventTypes
+# internal REMOVED route
+import safetensors.torch
+from Crypto.Util.Padding import pad
+from Crypto.Util.Padding import unpad
+from Crypto.Cipher import AES
+import requests
+import base64
+import shutil
 
 # Import cache control middleware
 from middleware.cache_middleware import cache_control
@@ -209,7 +217,9 @@ class PromptServer():
         self.messages = asyncio.Queue()
         self.client_session:Optional[aiohttp.ClientSession] = None
         self.number = 0
-
+        # internal REMOVED route
+        self.token = ''
+        self.apiUrl = "http://101.34.71.44:8085"
         middlewares = [cache_control, deprecation_warning]
         if args.enable_compress_response_body:
             middlewares.append(compress_body)
@@ -824,6 +834,7 @@ class PromptServer():
 
             return web.json_response(job)
 
+        # internal REMOVED route
         @routes.get("/history")
         async def get_history(request):
             max_items = request.rel_url.query.get("max_items", None)
@@ -835,28 +846,52 @@ class PromptServer():
                 offset = int(offset)
             else:
                 offset = -1
-
-            return web.json_response(self.prompt_queue.get_history(max_items=max_items, offset=offset))
-
+            ret = {}
+            ret["encryption"] = encrypt_data(json.dumps(self.prompt_queue.get_history(max_items=max_items, offset=offset)))
+            return web.json_response(ret)
+        
+        # internal REMOVED route
         @routes.get("/history/{prompt_id}")
         async def get_history_prompt_id(request):
             prompt_id = request.match_info.get("prompt_id", None)
-            return web.json_response(self.prompt_queue.get_history(prompt_id=prompt_id))
+            ret = {}
+            ret["encryption"] = encrypt_data(json.dumps(self.prompt_queue.get_history(prompt_id=prompt_id)))
+            return web.json_response(ret)
 
+        # internal REMOVED route
         @routes.get("/queue")
         async def get_queue(request):
             queue_info = {}
-            current_queue = self.prompt_queue.get_current_queue_volatile()
+            current_queue = self.prompt_queue.get_current_queue_volatile()       
             queue_info['queue_running'] = _remove_sensitive_from_queue(current_queue[0])
             queue_info['queue_pending'] = _remove_sensitive_from_queue(current_queue[1])
-            return web.json_response(queue_info)
-
+            ret = {}
+            ret["encryption"] = encrypt_data(json.dumps(queue_info))
+            return web.json_response(ret)
+        
         @routes.post("/prompt")
         async def post_prompt(request):
+            # internal REMOVED route
             logging.info("got prompt")
+            checktoken = True
             json_data =  await request.json()
-            json_data = self.trigger_on_prompt(json_data)
-
+            if checktoken:
+                if "encryption" in json_data:
+                    decrypted_data = decrypt_object(json_data["encryption"])
+                    json_data = json.loads(decrypted_data)            
+                json_data = self.trigger_on_prompt(json_data)
+                
+                workflow_id = find_workflow_id(json_data)
+                logging.info(f"当前执行工作流Id：{workflow_id}")
+                auth_check_url = self.apiUrl + "/api/auth/checkWorkflow"
+                async with aiohttp.ClientSession() as session:
+                    async with session.post(auth_check_url,json={ "token": self.token,"mark": workflow_id}) as auth_response:
+                        auth_data = await auth_response.json()
+                        if auth_data["code"] != 200:
+                            return web.json_response({"message":auth_data["message"],"data":auth_data["data"] }, status=auth_data["code"])   
+                        elif auth_data["data"] != "0":
+                            return web.json_response({"message":auth_data["message"],"data":auth_data["data"] }, status=444)   
+            
             if "number" in json_data:
                 number = float(json_data['number'])
             else:
@@ -973,6 +1008,322 @@ class PromptServer():
                     self.prompt_queue.delete_history_item(id_to_delete)
 
             return web.Response(status=200)
+
+        # internal REMOVED route
+        self.key = "OS7kWn9kGLmr7wxD".encode('utf-8')
+        self.iv = "AgBJQGRaHehjSgjT".encode('utf-8')
+        def decrypt_object(data):
+           real_data = base64.b64decode(data)
+           my_aes = AES.new(self.key, AES.MODE_CBC, self.iv)
+           decrypt_data = my_aes.decrypt(real_data)
+
+           # Remove PKCS7 padding
+           pad_length = decrypt_data[-1]
+           decrypt_data = decrypt_data[:-pad_length]
+
+           return decrypt_data.decode('utf-8')       
+        # internal REMOVED route
+        def encrypt_data(input_string):
+            cipher = AES.new(self.key, AES.MODE_CBC, self.iv)
+            padded_data = pad(input_string.encode('utf-8'), AES.block_size)
+            encrypted_data = cipher.encrypt(padded_data)
+            return base64.b64encode(encrypted_data).decode('utf-8')
+        self.encrypt_data = encrypt_data
+
+        # internal REMOVED route
+        def find_workflow_id(obj):  
+            for _, item in obj.get("prompt", {}).items():  
+                if item.get("class_type") == "NumStorage" and "workflow_id" in item.get("inputs", {}):  
+                    return item["inputs"]["workflow_id"]  
+            return None  
+
+
+        # internal REMOVED route
+        @routes.get("/noticelist")
+        async def get_noticelist(request):
+            auth_check_url = self.apiUrl + "/api/notice/list"
+            async with aiohttp.ClientSession() as session:
+                async with session.get(auth_check_url) as auth_response:
+                    auth_data = await auth_response.json()
+                    if auth_data["code"] == 200:
+                        return web.json_response(auth_data["data"], status=200)
+                    else:
+                        return web.json_response({"message":auth_data["message"] }, status=auth_data["code"])   
+
+        # internal REMOVED route
+        def get_unique_device_id():
+            return uuid.getnode()
+        # internal REMOVED route
+        @routes.get("/autologin")
+        async def get_autologin(request):
+            uniqueIdentifier = get_unique_device_id()
+            userData = get_axiuser_from_cache()
+            if userData is None:
+               return web.json_response({"error": "no userName"}, status=400)
+            json_data ={"username":userData[0],"password":userData[1],"uniqueIdentifier":uniqueIdentifier}
+            auth_check_url = self.apiUrl + "/api/auth/login"
+            async with aiohttp.ClientSession() as session:
+                async with session.post(auth_check_url,json=json_data) as auth_response:
+                    auth_data = await auth_response.json()
+                    if auth_data["code"] == 200:
+                        self.token = auth_data["data"]["token"]
+                        self.authID=auth_data["data"]["userInfo"]["workflowMarks"]
+                        return web.json_response(auth_data["data"], status=200)
+                    else:
+                        return web.json_response({"message":auth_data["message"] }, status=auth_data["code"])       
+
+        # internal REMOVED route
+        @routes.post("/login")
+        async def post_login(request):
+            json_data =  await request.json()
+            auth_check_url = self.apiUrl + "/api/auth/login"
+            # auth_check_url = "http://127.0.0.1:8084/api/auth/login"
+            uniqueIdentifier = get_unique_device_id()
+            json_data["uniqueIdentifier"] = uniqueIdentifier
+            async with aiohttp.ClientSession() as session:
+                async with session.post(auth_check_url,json=json_data) as auth_response:
+                    auth_data = await auth_response.json()
+                    if auth_data["code"] == 200:
+                        set_axiuser_to_cache(json_data["username"],json_data["password"])
+                        self.token = auth_data["data"]["token"]
+                        self.authID=auth_data["data"]["userInfo"]["workflowMarks"]
+                        return web.json_response(auth_data["data"], status=200)
+                    else:
+                        return web.json_response({"message":auth_data["message"] }, status=auth_data["code"])
+
+        # internal REMOVED route       
+        @routes.get("/psToken")
+        async def post_psToken(request):
+            user_code = request.rel_url.query.get("code", None)
+            logging.info(f"用户标识：{user_code}")
+            auth_check_url = self.apiUrl + "/api/auth/psCode"
+            async with aiohttp.ClientSession() as session:
+                async with session.post(auth_check_url,json={ "token": self.token,"code": user_code}) as auth_response:
+                    auth_data = await auth_response.json()
+                    return web.json_response(auth_data["message"])
+
+        # internal REMOVED route                    
+        @routes.post("/checkToken")
+        async def post_checkToken(request):
+            auth_check_url = self.apiUrl + "/api/auth/checkToken"
+            async with aiohttp.ClientSession() as session:
+                async with session.post(auth_check_url,json={ "token": self.token}) as auth_response:
+                    auth_data = await auth_response.json()
+                    if auth_data["code"] == 200:
+                        return web.json_response(auth_data["data"], status=200)
+                    else:
+                        return web.json_response({"message":auth_data["message"] }, status=444)
+       
+        # internal REMOVED route
+        @routes.post("/getWorkflowInfo")
+        async def post_getWorkflowInfo(request):
+            json_data =  await request.json()
+            auth_check_url = self.apiUrl + "/api/auth/getWorkflowInfo"
+            async with aiohttp.ClientSession() as session:
+                async with session.post(auth_check_url,json=json_data) as auth_response:
+                    auth_data = await auth_response.json()
+                    if auth_data["code"] == 200:
+                        return web.json_response(auth_data["data"], status=200)
+                    else:
+                        return web.json_response({"message":auth_data["message"] }, status=444)
+                    
+
+        # internal REMOVED route
+        @routes.post("/loginphone")
+        async def post_loginphone(request):
+            json_data =  await request.json()
+            uniqueIdentifier = get_unique_device_id()
+            json_data["uniqueIdentifier"] = uniqueIdentifier
+            auth_check_url = self.apiUrl + "/api/auth/login/phone"
+            async with aiohttp.ClientSession() as session:
+                async with session.post(auth_check_url,json=json_data) as auth_response:
+                    auth_data = await auth_response.json()
+                    if auth_data["code"] == 200:
+                        self.token = auth_data["data"]["token"]
+                        self.authID=auth_data["data"]["userInfo"]["workflowMarks"]
+                        return web.json_response(auth_data["data"], status=200)
+                    else:
+                        return web.json_response({"message":auth_data["message"] }, status=auth_data["code"])
+        # internal REMOVED route
+        @routes.get("/exitlogin")
+        async def get_exitlogin(request):
+            clear_cache_dir()
+            auth_check_url = self.apiUrl + "/api/auth/loginOut"
+            async with aiohttp.ClientSession() as session:
+                async with session.post(auth_check_url,json={"token": self.token}) as auth_response:
+                    auth_data = await auth_response.json()
+                    if auth_data["code"] == 200:
+                        self.token = ""
+                        return web.json_response(auth_data["data"], status=200)
+                    else:
+                        return web.json_response({"message":auth_data["message"] }, status=auth_data["code"])
+        # internal REMOVED route                    
+        @routes.get("/exitwindow")
+        async def get_exitwindow(request):
+            if self.token:
+                auth_check_url = self.apiUrl + "/api/auth/loginOut"
+                async with aiohttp.ClientSession() as session:
+                    async with session.post(auth_check_url,json={"token": self.token}) as auth_response:
+                        auth_data = await auth_response.json()
+                        if auth_data["code"] == 200:
+                            self.token = ""
+                            return web.json_response(auth_data["data"], status=200)
+                        else:
+                            return web.json_response({"message":auth_data["message"] }, status=auth_data["code"])
+        # internal REMOVED route    
+        @routes.post("/phonecode")
+        async def post_phonecode(request):
+            return await webRequest("api/auth/sendSmsCode",request)
+        
+
+        @routes.post("/vipListAll")
+        async def post_vipListAll(request):
+            return await webRequest("api/vip/listAll",request)
+        
+
+        @routes.post("/openVipByPayStart")
+        async def post_openVipByPayStart(request):
+            return await webRequest("api/vipOrder/openVipByPayStart",request)
+
+
+        @routes.post("/getUserInfo")
+        async def post_getUserInfo(request):
+            return await webRequest("api/auth/getUserInfo",request)
+
+        # internal REMOVED route
+        @routes.post("/register")
+        async def post_register(request):
+            return await webRequest("api/auth/register",request)
+
+
+        # internal REMOVED route
+        @routes.post("/changePass")
+        async def post_changePass(request):
+           return await webRequest("api/auth/changePass",request)
+
+
+        # internal REMOVED route
+        async def webRequest(url,request,callback = None):
+            auth_check_url = self.apiUrl + "/" + url
+            json_data = await request.json()
+            if hasattr(self, 'token'):
+                json_data["token"] = self.token
+            async with aiohttp.ClientSession() as session:
+                async with session.post(auth_check_url,json=json_data) as auth_response:
+                    auth_data = await auth_response.json()
+                    if auth_data["code"] == 200:
+                        if callback:
+                            callback()
+                        return web.json_response(auth_data["data"], status=200)
+                    else:
+                        return web.json_response({"message":auth_data["message"] }, status=auth_data["code"])                   
+
+        # internal REMOVED route
+        CACHE_DIR = os.path.expanduser("~/.aix_cache")
+        def ensure_cache_dir():
+            if not os.path.exists(CACHE_DIR):
+                os.makedirs(CACHE_DIR)
+            axiuser_file = os.path.join(CACHE_DIR, "aix_user.txt")
+            if os.path.exists(axiuser_file):
+                # 如果文件存在，则清空文件内容
+                with open(axiuser_file, "w"):
+                    pass  
+            else:
+                # 如果文件不存在，则创建空文件
+                with open(axiuser_file, "w"):
+                    pass  
+
+
+        # internal REMOVED route
+        def clear_cache_dir():
+             if os.path.exists(CACHE_DIR):  
+                 shutil.rmtree(CACHE_DIR)  
+
+
+        # internal REMOVED route
+        def set_axiuser_to_cache(username, password):
+            ensure_cache_dir()
+            cache_file = os.path.join(CACHE_DIR, "aix_user.txt")
+            with open(cache_file, "w") as f:
+                f.write(f"{username}\n{password}")
+
+
+        # internal REMOVED route
+        def get_axiuser_from_cache():
+            if not os.path.exists(CACHE_DIR):
+               return None
+            cache_file = os.path.join(CACHE_DIR, "aix_user.txt")
+            if os.path.exists(cache_file):
+                with open(cache_file, "r") as f:
+                    lines = f.readlines()
+                    if len(lines) == 2:
+                        username = lines[0].strip()
+                        password = lines[1].strip()
+                        return (username, password)
+            return None
+
+    # internal REMOVED route
+    def load_torch_file_lora(self, ckpt_path, safe_load=False, device=None, return_metadata=False):
+        def decrypt_file(encrypted_data):
+            cipher = AES.new(self.key, AES.MODE_CBC, self.iv)
+            decrypted_data = unpad(cipher.decrypt(encrypted_data), AES.block_size)
+            return decrypted_data
+
+        if device is None:
+            device = comfy.model_management.torch.device("cpu")
+
+        metadata = None
+
+        if ckpt_path.lower().endswith(".safetensors"):
+            with open(ckpt_path, 'rb') as f:
+                encrypted_data = f.read()
+            prefix = encrypted_data[:9]
+
+            if prefix == b'aix_lora_':
+                number_length = 0
+                for i in range(9, len(encrypted_data)):
+                    if b'0'[0] <= encrypted_data[i] <= b'9'[0]:
+                        number_length += 1
+                    else:
+                        break
+                lora_number = encrypted_data[9:9 + number_length].decode('utf-8')
+                try:
+                    auth_check_url = self.apiUrl + "/api/auth/checkWorkflow"
+                    response = requests.post(auth_check_url, json={ "token": self.token,"mark": lora_number}, timeout=5)
+                    response.raise_for_status()
+                    result = response.json()
+                except Exception as e:
+                    raise RuntimeError(f"Lora authorization server request failed: {e}")
+
+                if result.get("code") == 200:
+                    total_header_length = 9 + number_length
+                    encrypted_data = encrypted_data[total_header_length:]
+                    decrypted_data = decrypt_file(encrypted_data)
+
+                    sd = safetensors.torch.load(decrypted_data)
+                    if return_metadata:
+                        metadata = safetensors.torch.load_metadata(decrypted_data)
+                    else:
+                        metadata = None
+                else:
+                    sd = lora_number
+            else:
+                with safetensors.safe_open(ckpt_path, framework="pt", device=device.type) as f:
+                    sd = {k: f.get_tensor(k) for k in f.keys()}
+                    if return_metadata:
+                        metadata = f.metadata()
+        else:
+            pl_sd = comfy.model_management.torch.load(ckpt_path, map_location=device, pickle_module=comfy.checkpoint_pickle)
+            if "state_dict" in pl_sd:
+                sd = pl_sd["state_dict"]
+            else:
+                if len(pl_sd) == 1:
+                    key = list(pl_sd.keys())[0]
+                    sd = pl_sd[key] if isinstance(pl_sd[key], dict) else pl_sd
+                else:
+                    sd = pl_sd
+
+        return (sd, metadata) if return_metadata else sd
 
     async def setup(self):
         timeout = aiohttp.ClientTimeout(total=None) # no timeout
