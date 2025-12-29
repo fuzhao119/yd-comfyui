@@ -28,9 +28,8 @@ from comfy_api.internal import (_ComfyNodeInternal, _NodeOutputInternal, classpr
     prune_dict, shallow_clone_class)
 from ._resources import Resources, ResourcesLocal
 from comfy_execution.graph_utils import ExecutionBlocker
-from ._util import MESH, VOXEL
+from ._util import MESH, VOXEL, SVG as _SVG
 
-# from comfy_extras.nodes_images import SVG as SVG_ # NOTE: needs to be moved before can be imported due to circular reference
 
 class FolderType(str, Enum):
     input = "input"
@@ -656,7 +655,7 @@ class Video(ComfyTypeIO):
 
 @comfytype(io_type="SVG")
 class SVG(ComfyTypeIO):
-    Type = Any # TODO: SVG class is defined in comfy_extras/nodes_images.py, causing circular reference; should be moved to somewhere else before referenced directly in v3
+    Type = _SVG
 
 @comfytype(io_type="LORA_MODEL")
 class LoraModel(ComfyTypeIO):
@@ -773,6 +772,13 @@ class AudioEncoder(ComfyTypeIO):
 @comfytype(io_type="AUDIO_ENCODER_OUTPUT")
 class AudioEncoderOutput(ComfyTypeIO):
     Type = Any
+
+@comfytype(io_type="TRACKS")
+class Tracks(ComfyTypeIO):
+    class TrackDict(TypedDict):
+        track_path: torch.Tensor
+        track_visibility: torch.Tensor
+    Type = TrackDict
 
 @comfytype(io_type="COMFY_MULTITYPED_V3")
 class MultiType:
@@ -1549,12 +1555,12 @@ class _ComfyNodeBaseInternal(_ComfyNodeInternal):
 
     @final
     @classmethod
-    def PREPARE_CLASS_CLONE(cls, v3_data: V3Data) -> type[ComfyNode]:
+    def PREPARE_CLASS_CLONE(cls, v3_data: V3Data | None) -> type[ComfyNode]:
         """Creates clone of real node class to prevent monkey-patching."""
         c_type: type[ComfyNode] = cls if is_class(cls) else type(cls)
         type_clone: type[ComfyNode] = shallow_clone_class(c_type)
         # set hidden
-        type_clone.hidden = HiddenHolder.from_dict(v3_data["hidden_inputs"])
+        type_clone.hidden = HiddenHolder.from_dict(v3_data["hidden_inputs"] if v3_data else None)
         return type_clone
 
     @final
@@ -1815,7 +1821,7 @@ class NodeOutput(_NodeOutputInternal):
             ui = data["ui"]
         if "expand" in data:
             expand = data["expand"]
-        return cls(args=args, ui=ui, expand=expand)
+        return cls(*args, ui=ui, expand=expand)
 
     def __getitem__(self, index) -> Any:
         return self.args[index]
@@ -1894,6 +1900,7 @@ __all__ = [
     "SEGS",
     "AnyType",
     "MultiType",
+    "Tracks",
     # Dynamic Types
     "MatchType",
     # "DynamicCombo",
