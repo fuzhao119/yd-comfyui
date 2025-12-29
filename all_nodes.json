@@ -1,0 +1,318 @@
+{
+    "ben_ultra.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerMask: BenUltra": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.ben_ultra.LS_BenUltra'>",
+            "LayerMask: LoadBenModel": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.ben_ultra.LS_LoadBenModel'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerMask: BenUltra": "LayerMask: Ben Ultra(Advance)",
+            "LayerMask: LoadBenModel": "LayerMask: Load Ben Model(Advance)"
+        }
+    },
+    "birefnet_ultra.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerMask: BiRefNetUltra": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.birefnet_ultra.BiRefNetUltra'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerMask: BiRefNetUltra": "LayerMask: BiRefNetUltra(Advance)"
+        }
+    },
+    "birefnet_ultra_v2.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerMask: BiRefNetUltraV2": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.birefnet_ultra_v2.LS_BiRefNetUltraV2'>",
+            "LayerMask: LoadBiRefNetModel": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.birefnet_ultra_v2.LS_LoadBiRefNetModel'>",
+            "LayerMask: LoadBiRefNetModelV2": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.birefnet_ultra_v2.LS_LoadBiRefNetModelV2'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerMask: BiRefNetUltraV2": "LayerMask: BiRefNet Ultra V2(Advance)",
+            "LayerMask: LoadBiRefNetModel": "LayerMask: Load BiRefNet Model(Advance)",
+            "LayerMask: LoadBiRefNetModelV2": "LayerMask: Load BiRefNet Model V2(Advance)"
+        }
+    },
+    "evf_sam_ultra.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerMask: EVFSAMUltra": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.evf_sam_ultra.EVF_SAM_Ultra'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerMask: EVFSAMUltra": "LayerMask: EVF-SAM Ultra(Advance)"
+        }
+    },
+    "florence2_ultra.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerMask: Florence2Ultra": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.florence2_ultra.Florence2Ultra'>",
+            "LayerMask: LoadFlorence2Model": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.florence2_ultra.LS_LoadFlorence2Model'>",
+            "LayerUtility: Florence2Image2Prompt": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.florence2_ultra.Florence2Image2Prompt'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerMask: Florence2Ultra": "LayerMask: Florence2 Ultra(Advance)",
+            "LayerMask: LoadFlorence2Model": "LayerMask: Load Florence2 Model(Advance)",
+            "LayerUtility: Florence2Image2Prompt": "LayerUtility: Florence2 Image2Prompt(Advance)"
+        }
+    },
+    "get_color_tone.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerUtility: GetColorTone": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.get_color_tone.GetColorTone'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerUtility: GetColorTone": "LayerUtility: GetColorTone(Advance)"
+        }
+    },
+    "get_color_tone_v2.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerUtility: GetColorToneV2": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.get_color_tone_v2.GetColorToneV2'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerUtility: GetColorToneV2": "LayerUtility: GetColorTone V2(Advance)"
+        }
+    },
+    "human_parts_ultra.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerMask: HumanPartsUltra": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.human_parts_ultra.LS_HumanPartsUltra'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerMask: HumanPartsUltra": "LayerMask: Human Parts Ultra(Advance)"
+        }
+    },
+    "image_auto_crop.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerUtility: ImageAutoCrop": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.image_auto_crop.ImageAutoCrop'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerUtility: ImageAutoCrop": "LayerUtility: ImageAutoCrop(Advance)"
+        }
+    },
+    "image_auto_crop_v2.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerUtility: ImageAutoCrop V2": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.image_auto_crop_v2.ImageAutoCropV2'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerUtility: ImageAutoCrop V2": "LayerUtility: ImageAutoCrop V2(Advance)"
+        }
+    },
+    "image_auto_crop_v3.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerUtility: ImageAutoCrop V3": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.image_auto_crop_v3.ImageAutoCropV3'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerUtility: ImageAutoCrop V3": "LayerUtility: ImageAutoCrop V3(Advance)"
+        }
+    },
+    "image_reward_filter.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerUtility: ImageRewardFilter": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.image_reward_filter.ImageRewardFilter'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerUtility: ImageRewardFilter": "LayerUtility: ImageRewardFilter(Advanced)"
+        }
+    },
+    "joycaption_alpha_2.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerUtility: LoadJoyCaption2Model": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.joycaption_alpha_2.LS_LoadJoyCaption2Model'>",
+            "LayerUtility: JoyCaption2Split": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.joycaption_alpha_2.LS_JoyCaption2Split'>",
+            "LayerUtility: JoyCaption2": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.joycaption_alpha_2.LS_JoyCaption2'>",
+            "LayerUtility: JoyCaption2ExtraOptions": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.joycaption_alpha_2.LS_JoyCaptionExtraOptions'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerUtility: LoadJoyCaption2Model": "LayerUtility: Load JoyCaption2 Model(Advance)",
+            "LayerUtility: JoyCaption2Split": "LayerUtility: JoyCaption2 Split(Advance)",
+            "LayerUtility: JoyCaption2": "LayerUtility: JoyCaption2(Advance)",
+            "LayerUtility: JoyCaption2ExtraOptions": "LayerUtility: JoyCaption2 Extra Options(Advance)"
+        }
+    },
+    "lama.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerUtility: LaMa": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.lama.LaMa'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerUtility: LaMa": "LayerUtility: LaMa(Advance)"
+        }
+    },
+    "llama_vision.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerUtility: LlamaVision": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.llama_vision.LS_LlamaVision'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerUtility: LlamaVision": "LayerUtility: Llama Vision(Advance)"
+        }
+    },
+    "loadpsd.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerUtility: LoadPSD": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.loadpsd.LoadPSD'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerUtility: LoadPSD": "LayerUtility: Load PSD(Advance)"
+        }
+    },
+    "mask_by_different.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerMask: MaskByDifferent": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.mask_by_different.MaskByDifferent'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerMask: MaskByDifferent": "LayerMask: MaskByDifferent(Advance)"
+        }
+    },
+    "mediapipe_facial_segment.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerMask: MediapipeFacialSegment": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.mediapipe_facial_segment.FacialFeatureSegment'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerMask: MediapipeFacialSegment": "LayerMask: Mediapipe Facial Segment(Advance)"
+        }
+    },
+    "object_detector.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerMask: BBoxJoin": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.object_detector.LS_BBOXES_JOIN'>",
+            "LayerMask: DrawBBoxMask": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.object_detector.LS_DrawBBoxMask'>",
+            "LayerMask: ObjectDetectorFL2": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.object_detector.LS_OBJECT_DETECTOR_FL2'>",
+            "LayerMask: ObjectDetectorMask": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.object_detector.LS_OBJECT_DETECTOR_MASK'>",
+            "LayerMask: ObjectDetectorYOLO8": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.object_detector.LS_OBJECT_DETECTOR_YOLO8'>",
+            "LayerMask: ObjectDetectorYOLOWorld": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.object_detector.LS_OBJECT_DETECTOR_YOLOWORLD'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerMask: BBoxJoin": "LayerMask: BBox Join(Advance)",
+            "LayerMask: DrawBBoxMask": "LayerMask: Draw BBox Mask(Advance)",
+            "LayerMask: ObjectDetectorFL2": "LayerMask: Object Detector Florence2(Advance)",
+            "LayerMask: ObjectDetectorMask": "LayerMask: Object Detector Mask(Advance)",
+            "LayerMask: ObjectDetectorYOLO8": "LayerMask: Object Detector YOLO8(Advance)",
+            "LayerMask: ObjectDetectorYOLOWorld": "LayerMask: Object Detector YOLO World(Obsolete)"
+        }
+    },
+    "person_mask_Ultra.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerMask: PersonMaskUltra": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.person_mask_Ultra.PersonMaskUltra'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerMask: PersonMaskUltra": "LayerMask: PersonMaskUltra(Advance)"
+        }
+    },
+    "person_mask_ultra_v2.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerMask: PersonMaskUltra V2": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.person_mask_ultra_v2.PersonMaskUltraV2'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerMask: PersonMaskUltra V2": "LayerMask: PersonMaskUltra V2(Advance)"
+        }
+    },
+    "phi_nodes.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerUtility: PhiPrompt": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.phi_nodes.LS_Phi_Prompt'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerUtility: PhiPrompt": "LayerUtility: Phi Prompt(Advance)"
+        }
+    },
+    "prompt_embellish.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerUtility: PromptEmbellish": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.prompt_embellish.PromptEmbellish'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerUtility: PromptEmbellish": "LayerUtility: PromptEmbellish(Advance)"
+        }
+    },
+    "prompt_tagger.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerUtility: PromptTagger": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.prompt_tagger.PromptTagger'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerUtility: PromptTagger": "LayerUtility: PromptTagger(Advance)"
+        }
+    },
+    "qrcode.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerUtility: CreateQRCode": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.qrcode.CreateQRCode'>",
+            "LayerUtility: DecodeQRCode": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.qrcode.DecodeQRCode'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerUtility: CreateQRCode": "LayerUtility: Create QRCode(Advance)",
+            "LayerUtility: DecodeQRCode": "LayerUtility: Decode QRCode(Advance)"
+        }
+    },
+    "Qwen_image2prompt.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerUtility: QWenImage2Prompt": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.Qwen_image2prompt.QWenImage2Prompt'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerUtility: QWenImage2Prompt": "LayerUtility: QWenImage2Prompt(Advance)"
+        }
+    },
+    "sam_2_ultra.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerMask: SAM2Ultra": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.sam_2_ultra.LS_SAM2_ULTRA'>",
+            "LayerMask: SAM2VideoUltra": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.sam_2_ultra.LS_SAM2_VIDEO_ULTRA'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerMask: SAM2Ultra": "LayerMask: SAM2 Ultra",
+            "LayerMask: SAM2VideoUltra": "LayerMask: SAM2 Video Ultra(Advance)"
+        }
+    },
+    "save_image_plus.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerUtility: SaveImagePlus": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.save_image_plus.SaveImagePlus'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerUtility: SaveImagePlus": "LayerUtility: SaveImage Plus(Advance)"
+        }
+    },
+    "sd3_negative_conditioning.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerUtility: SD3NegativeConditioning": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.sd3_negative_conditioning.SD3NegativeConditioning'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerUtility: SD3NegativeConditioning": "LayerUtility: SD3 Negative Conditioning(Advance)"
+        }
+    },
+    "segment_anything_ultra.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerMask: SegmentAnythingUltra": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.segment_anything_ultra.SegmentAnythingUltra'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerMask: SegmentAnythingUltra": "LayerMask: SegmentAnythingUltra(Advance)"
+        }
+    },
+    "segment_anything_ultra_v2.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerMask: SegmentAnythingUltra V2": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.segment_anything_ultra_v2.SegmentAnythingUltraV2'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerMask: SegmentAnythingUltra V2": "LayerMask: SegmentAnythingUltra V2(Advance)"
+        }
+    },
+    "transparent_background_ultra.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerMask: TransparentBackgroundUltra": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.transparent_background_ultra.TransparentBackgroundUltra'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerMask: TransparentBackgroundUltra": "LayerMask: Transparent Background Ultra(Advance)"
+        }
+    },
+    "user_prompt_generator.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerUtility: UserPromptGeneratorTxt2ImgPrompt": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.user_prompt_generator.LS_UserPromptGenerator_Txt2ImgPrompt'>",
+            "LayerUtility: UserPromptGeneratorTxt2ImgPromptWithReference": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.user_prompt_generator.LS_UserPromptGenerator_Txt2ImgPromptWithReference'>",
+            "LayerUtility: UserPromptGeneratorReplaceWord": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.user_prompt_generator.LS_UserPromptGenerator_ReplaceWord'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerUtility: UserPromptGeneratorTxt2ImgPrompt": "LayerUtility: UserPrompt Generator Txt2Img(Advance)",
+            "LayerUtility: UserPromptGeneratorTxt2ImgPromptWithReference": "LayerUtility: UserPrompt Generator Txt2Img with Reference(Advance)",
+            "LayerUtility: UserPromptGeneratorReplaceWord": "LayerUtility: UserPrompt Generator Replace Word(Advance)"
+        }
+    },
+    "watermark.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerUtility: AddBlindWaterMark": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.watermark.EncodeBlindWaterMark'>",
+            "LayerUtility: ShowBlindWaterMark": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.watermark.DecodeBlindWaterMark'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerUtility: AddBlindWaterMark": "LayerUtility: Add BlindWaterMark(Advance)",
+            "LayerUtility: ShowBlindWaterMark": "LayerUtility: Show BlindWaterMark(Advance)"
+        }
+    },
+    "yolov8_detect.py": {
+        "NODE_CLASS_MAPPINGS": {
+            "LayerMask: YoloV8Detect": "<class 'F:\\AIX-baoti\\AIX-new\\ComfyUI\\custom_nodes\\ComfyUI_LayerStyle_Advance.py.yolov8_detect.YoloV8Detect'>"
+        },
+        "NODE_DISPLAY_NAME_MAPPINGS": {
+            "LayerMask: YoloV8Detect": "LayerMask: YoloV8 Detect(Advance)"
+        }
+    }
+}
