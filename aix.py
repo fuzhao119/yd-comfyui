@@ -7,6 +7,7 @@ import folder_paths
 import time
 from comfy.cli_args import args
 from app.logger import setup_logger
+from app.assets.scanner import seed_assets
 import itertools
 import utils.extra_config
 import logging
@@ -325,6 +326,8 @@ def setup_database():
         from app.database.db import init_db, dependencies_available
         if dependencies_available():
             init_db()
+            if not args.disable_assets_autoscan:
+                seed_assets(["models"], enable_logging=True)
     except Exception as e:
         logging.error(f"Failed to initialize database. Please ensure you have installed the latest requirements. If the error persists, please report this as in future the database will be required: {e}")
 
@@ -339,11 +342,10 @@ def start_comfyui(asyncio_loop=None):
         logging.info(f"Setting temp directory to: {temp_dir}")
         folder_paths.set_temp_directory(temp_dir)
     cleanup_temp()
-
+    
     # internal REMOVED route
     os.environ['HF_HOME'] = os.path.join(folder_paths.models_dir, 'cache', 'huggingface')
     os.environ['TORCH_HOME'] = os.path.join(folder_paths.models_dir, 'cache', 'torch')
-    
     if args.windows_standalone_build:
         try:
             import new_updater
@@ -380,14 +382,13 @@ def start_comfyui(asyncio_loop=None):
     os.makedirs(folder_paths.get_temp_directory(), exist_ok=True)
     call_on_start = None
     if args.auto_launch:
-    # internal REMOVED route
         def startup_server(scheme, address, port):
-             aix_exe_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "client", "start.exe")
-             logging.error(aix_exe_path)
-             if os.path.isfile(aix_exe_path):
-                 subprocess.Popen([aix_exe_path])
-             else:
-                 logging.error("AIX智能绘图.exe文件未找到，请检查路径是否正确。")
+            import webbrowser
+            if os.name == 'nt' and address == '0.0.0.0':
+                address = '127.0.0.1'
+            if ':' in address:
+                address = "[{}]".format(address)
+            webbrowser.open(f"{scheme}://{address}:{port}")
         call_on_start = startup_server
 
     async def start_all():
